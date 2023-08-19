@@ -23,5 +23,11 @@ pipeline {
                sh 'mvn verify -DskipUnitTests'
             }   
         }   
+
+        stage("Build code") {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
     }   
 }
