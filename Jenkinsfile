@@ -6,21 +6,22 @@ pipeline {
     }
 
     stages{
-        stage("Checkout code"){
-            steps{
+        stage("Checkout code") {
+            steps {
                 git branch: 'main', url: 'https://github.com/NalawadeAnil14/E2E-jenkins-pipe.git'
             }
         }
 
-        stage("Unit testing"){
+        stage("Unit testing") {
             steps {
                 sh 'mvn test'
             }
         }
 
-        stage("Integration testing")
-           steps{
-            sh 'mvn verify -DskipUnitTests'
-           }   
+        stage("Integration testing") {
+            steps {
+               sh 'mvn verify -DskipUnitTests'
+            }   
+        }   
     }   
 }
