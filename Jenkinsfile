@@ -1,5 +1,10 @@
 pipeline {
-    agent { label 'NADE1' }
+    agent { label 'NODE1' }
+
+    options {
+       buildDiscarder(logRotator(numToKeepStr: '5'))
+    }
+
     stages{
         stage("Checkout code"){
             steps{
