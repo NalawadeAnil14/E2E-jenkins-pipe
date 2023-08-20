@@ -5,6 +5,10 @@ pipeline {
        buildDiscarder(logRotator(numToKeepStr: '5'))
     }
 
+    environment {
+       build_user = env.BUILD_USER
+    }
+
     stages{
         stage("Checkout code") {
             steps {
@@ -32,6 +36,7 @@ pipeline {
 
         stage("Docker build"){
             steps {
+                echo "Build triggered by user : ${build_user}"
                 sh 'docker build -t demoapp .'
             }
         } 
