@@ -38,9 +38,9 @@ pipeline {
             steps {
                 //sh 'printenv'
                 script {
-                  sh 'docker build -t $JOB_NAME:v1.$BUILD_ID .'
-                  sh 'docker tag $JOB_NAME:v1.$BUILD_ID anilnalawade/$JOB_NAME:v1.$BUILD_ID'
-                  sh 'docker tag $JOB_NAME:v1.$BUILD_ID anilnalawade/$JOB_NAME:latest'
+                  sh 'docker build -t demo-app:v1.$BUILD_ID .'
+                  sh 'docker tag demo-app:v1.$BUILD_ID anilnalawade/demo-app:v1.$BUILD_ID'
+                  sh 'docker tag demo-app:v1.$BUILD_ID anilnalawade/demo-app:latest'
                 }
             }
         }
@@ -50,8 +50,8 @@ pipeline {
               script {
                 withCredentials([usernamePassword(credentialsId: 'dockerhubToken', passwordVariable: 'dockerhub_password', usernameVariable: 'dockerhub_username')]) {
                   sh 'docker login -u ${dockerhub_username} -p ${dockerhub_password}'
-                  sh 'docker push anilnalawade/$JOB_NAME:v1.$BUILD_ID'
-                  sh 'docker push anilnalawade/$JOB_NAME:latest'
+                  sh 'docker push anilnalawade/demo-app:v1.$BUILD_ID'
+                  sh 'docker push anilnalawade/demo-app:latest'
                 }
               }  
            }  
