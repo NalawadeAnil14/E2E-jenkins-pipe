@@ -36,7 +36,7 @@ pipeline {
 
         stage("Docker build"){
             steps {
-                echo "Build triggered by user : ${build_user}"
+                echo "printenv"
                 sh 'docker build -t demoapp .'
             }
         } 
