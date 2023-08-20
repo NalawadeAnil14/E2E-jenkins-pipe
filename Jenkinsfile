@@ -9,7 +9,7 @@ pipeline {
        build_user = "${env.BUILD_USER}"
     }
 
-    stages{
+    /*stages{
         stage("Checkout code") {
             steps {
                 git branch: 'main', url: 'https://github.com/NalawadeAnil14/E2E-jenkins-pipe.git'
@@ -32,12 +32,12 @@ pipeline {
             steps {
                 sh 'mvn clean install'
             }
-        }
+        }*/
 
         stage("Docker build"){
             steps {
-                echo "printenv"
-                sh 'docker build -t demoapp .'
+                sh 'printenv'
+                //sh 'docker build -t demoapp .'
             }
         } 
     }   
