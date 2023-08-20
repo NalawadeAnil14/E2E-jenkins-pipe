@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-       build_user = env.BUILD_USER
+       build_user = "${env.BUILD_USER}"
     }
 
     stages{
