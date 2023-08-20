@@ -46,13 +46,15 @@ pipeline {
         }
 
         stage("Push docker image on dockerhub") {
-            script {
-              withCredentials([usernamePassword(credentialsId: 'dockerhubToken', passwordVariable: 'dockerhub_password', usernameVariable: 'dockerhub_username')]) {
-                sh 'docker login -u ${dockerhub_username} -p ${dockerhub_password}'
-                sh 'docker push anilnalawade/$JOB_NAME:v1.$BUILD_ID'
-                sh 'docker push anilnalawade/$JOB_NAME:latest'
-              }
-            }  
-        }  
-    }   
-}
+            steps {
+              script {
+                withCredentials([usernamePassword(credentialsId: 'dockerhubToken', passwordVariable: 'dockerhub_password', usernameVariable: 'dockerhub_username')]) {
+                  sh 'docker login -u ${dockerhub_username} -p ${dockerhub_password}'
+                  sh 'docker push anilnalawade/$JOB_NAME:v1.$BUILD_ID'
+                  sh 'docker push anilnalawade/$JOB_NAME:latest'
+                }
+              }  
+           }  
+       }     
+   }
+}   
