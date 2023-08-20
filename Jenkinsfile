@@ -37,7 +37,15 @@ pipeline {
         stage("Docker build"){
             steps {
                 //sh 'printenv'
-                sh 'docker build -t demoapp .'
+                sh 'docker build -t E2E-jenkins-pipe:${env.BUILD_NUMBER} .'
+                sh 'docker tag E2E-jenkins-pipe:${env.BUILD_NUMBER} anilnalawade/E2E-jenkins-pipe:${env.BUILD_NUMBER}'
+                sh 'docker tag E2E-jenkins-pipe:${env.BUILD_NUMBER} anilnalawade/E2E-jenkins-pipe:latest'
+                
+                withCredentials([usernamePassword(credentialsId: 'dockerhubToken', passwordVariable: 'dockerhub_password', usernameVariable: 'dockerhub_username')]) {
+                   sh 'docker login -u ${dockerhub_username} -p ${dockerhub_password}'
+                   sh 'docker push anilnalawade/E2E-jenkins-pipe:${env.BUILD_NUMBER}'
+                   sh 'docker push anilnalawade/E2E-jenkins-pipe:latest'
+                }
             }
         } 
     }   
